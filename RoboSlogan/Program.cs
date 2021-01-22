@@ -29,13 +29,7 @@ namespace RoboSlogan
                 .ReadFrom.Configuration(config, sectionName: "Serilog")
                 .CreateLogger();
 
-            logConfig.Information("Hello, world!");
-
-            //var log = new SerilogTraceListener.SerilogTraceListener();
-            //Trace.Listeners.Add(log);
-            //var logConfig = new LoggerConfiguration().ReadFrom.Configuration(config);
-            ////logConfig.WriteTo.Console();
-            //Log.Logger = logConfig.CreateLogger();
+            Log.Logger = logConfig;
 
             try
             {
@@ -85,7 +79,6 @@ namespace RoboSlogan
         private Task _client_Log(LogMessage arg)
         {
             Log.Information(arg.ToString());
-            Console.WriteLine(arg);
             return Task.CompletedTask;
         }
 
@@ -107,11 +100,8 @@ namespace RoboSlogan
                 var result = await _commands.ExecuteAsync(context, argPos, _services);
                 if (!result.IsSuccess)
                 {
-                    Console.WriteLine($"{DateTime.Now} Error: {result.ErrorReason}");
-                    Console.WriteLine($"\t{message.Author}: {message}");
-
-
-                    //await ReplyAsync($"Error: {result.ErrorReason}");
+                    Log.Information($"Error: {result.ErrorReason}");
+                    Log.Information($"\t{message.Author}: {message}");
                 }
             }
         }

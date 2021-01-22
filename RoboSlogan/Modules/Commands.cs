@@ -1,4 +1,5 @@
 ﻿using Discord.Commands;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,7 @@ namespace RoboSlogan.Modules
         [Command("ping")]
         public async Task Ping()
         {
+            Log.Information("Recieved Command Ping");
             await ReplyAsync("Pong");
         }
     }
