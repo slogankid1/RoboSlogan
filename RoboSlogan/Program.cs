@@ -17,7 +17,6 @@ namespace RoboSlogan
         private CommandService _commands;
         private IServiceProvider _services;
         private IAppSettings _appSettings;
-        public Serilog.Core.Logger _logger;
 
         static void Main(string[] args) 
         {
@@ -25,11 +24,9 @@ namespace RoboSlogan
                 .AddJsonFile("config/appsettings.json", optional: false, reloadOnChange: false)
                 .Build();
 
-            var logConfig = new LoggerConfiguration()
+            Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(config, sectionName: "Serilog")
                 .CreateLogger();
-
-            Log.Logger = logConfig;
 
             try
             {
@@ -98,8 +95,7 @@ namespace RoboSlogan
                 var result = await _commands.ExecuteAsync(context, argPos, _services);
                 if (!result.IsSuccess)
                 {
-                    Log.Information($"Error: {result.ErrorReason}");
-                    Log.Information($"\t{message.Author}: {message}");
+                    Log.Error($"Error: {result.ErrorReason} >> {message.Author}: {message}");
                 }
             }
         }
