@@ -38,7 +38,6 @@ namespace RoboSlogan
             catch(Exception e)
             {
                 Log.Information(e.Message);
-                Console.WriteLine(e.Message);
             }
         }
 
@@ -56,7 +55,7 @@ namespace RoboSlogan
                 .AddSingleton( _appSettings)
                 .BuildServiceProvider();
 
-            string token = LoadToken();//_appSettings.Token;
+            string token = LoadToken();
 
             _client.Log += _client_Log;
 
@@ -73,7 +72,6 @@ namespace RoboSlogan
                 return _appSettings.Token;
 
             return System.IO.File.ReadAllText(@"token.txt");
-
         }
 
         private Task _client_Log(LogMessage arg)
