@@ -62,7 +62,7 @@ namespace RoboSlogan
                 .AddSingleton( _appSettings)
                 .BuildServiceProvider();
 
-            string token = _appSettings.Token;
+            string token = LoadToken();//_appSettings.Token;
 
             _client.Log += _client_Log;
 
@@ -71,6 +71,15 @@ namespace RoboSlogan
             await _client.StartAsync();
 
             await Task.Delay(-1); //keep bot awake
+        }
+
+        private string LoadToken()
+        {
+            if (!string.IsNullOrEmpty(_appSettings.Token.Trim())) 
+                return _appSettings.Token;
+
+            return System.IO.File.ReadAllText(@"token.txt");
+
         }
 
         private Task _client_Log(LogMessage arg)
