@@ -1,5 +1,4 @@
-﻿
-using Discord;
+﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
@@ -47,6 +46,7 @@ namespace RoboSlogan
 
         private string LoadToken()
         {
+            //Prioritises appsettings.json Token value
             if (!string.IsNullOrEmpty(_appSettings.Token.Trim()))
                 return _appSettings.Token;
 
