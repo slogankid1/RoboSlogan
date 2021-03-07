@@ -41,7 +41,7 @@ namespace RoboSlogan
             await _client.LoginAsync(TokenType.Bot, _token);
             await _client.StartAsync();
 
-            await Task.Delay(-1); //keep bot awake. TODO: Use Cancellation Token to stop bot w/ StopBot() method: Task.Delay(-1, cancellationToken)
+            await Task.Delay(-1); //keep bot awake. TODO: Use Cancellation Token to stop bot w/ StopBot() method: Task.Delay(-1, cancellationToken).
         }
 
         private string LoadToken()
