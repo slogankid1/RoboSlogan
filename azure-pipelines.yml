@@ -34,11 +34,11 @@ steps:
     arguments: '--configuration $(buildConfiguration) --output $(build.ArtifactStagingDirectory)'
     zipAfterPublish: true
 
-- task: FileTransform@1
-  inputs:
-    folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    fileType: 'json'
-    targetFiles: '**/appsettings.json'
+# - task: FileTransform@1
+#   inputs:
+#     folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
+#     fileType: 'json'
+#     targetFiles: '**/appsettings.json'
 
 - task: PublishBuildArtifacts@1
   displayName: 'publish artifacts'
